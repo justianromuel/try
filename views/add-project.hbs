@@ -45,25 +45,28 @@
         <form action="/add-project" method="post" class="mt-4 w-50 mx-auto">
             <!-- Project Name -->
             <div class="mb-3">
-                <label for="inputProjectName" class="form-label fw-bold fs-5 mb-1">Project Name</label>
-                <input type="text" class="form-control shadow rounded" id="inputProjectName" name="inputProjectName">
+                <label for="inputProjectName" class="form-label fw-bold fs-5 mb-1">Project
+                    Name</label>
+                <input type="text" class="form-control shadow rounded" id="inputProjectName" name="inputProjectName"
+                    required>
             </div>
             <!-- Date -->
             <div class="row justify-content-center">
                 <div class="col mb-3">
                     <label for="inputStartDate" class="form-label fw-bold fs-5 mb-1">Start Date</label>
-                    <input id="inputStartDate" class="form-control shadow rounded" type="date" name="startDate">
+                    <input id="inputStartDate" class="form-control shadow rounded" type="date" name="startDate"
+                        required>
                 </div>
                 <div class="col mb-3">
                     <label for="inputEndDate" class="form-label fw-bold fs-5 mb-1">End Date</label>
-                    <input id="inputEndDate" class="form-control shadow rounded" type="date" name="endDate">
+                    <input id="inputEndDate" class="form-control shadow rounded" type="date" name="endDate" required>
                 </div>
             </div>
             <!-- Description -->
             <div class="mb-3">
                 <label for="inputDescription" class="form-label fw-bold fs-5 mb-1">Description</label>
                 <textarea class="form-control shadow bg-body rounded" id="inputDescription" rows="5"
-                    name="inputDescription"></textarea>
+                    name="inputDescription" required></textarea>
             </div>
             <!-- Technologies -->
             <div class="mb-3">
@@ -71,23 +74,21 @@
                 <div class="row mx-0">
                     <div class="row justify-content-center">
                         <div class="col form-check">
-                            <input class="form-check-input shadow" type="checkbox" id="reactjs" name="reactjs"
-                                valus="on">
+                            <input class="form-check-input shadow" type="checkbox" id="reactjs" name="reactjs">
                             <label class="form-check-label" for="reactjs">React Js</label>
                         </div>
                         <div class="col form-check">
-                            <input class="form-check-input shadow" type="checkbox" id="nodejs" name="nodejs" valus="on">
+                            <input class="form-check-input shadow" type="checkbox" id="nodejs" name="nodejs">
                             <label class="form-check-label" for="nodejs">Node Js</label>
                         </div>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col form-check">
-                            <input class="form-check-input shadow" type="checkbox" id="javascript" name="javascript"
-                                valus="on">
+                            <input class="form-check-input shadow" type="checkbox" id="javascript" name="javascript">
                             <label class="form-check-label" for="javascript">Javascript</label>
                         </div>
                         <div class="col form-check">
-                            <input class="form-check-input shadow" type="checkbox" id="java" name="java" valus="on">
+                            <input class="form-check-input shadow" type="checkbox" id="java" name="java">
                             <label class="form-check-label" for="java">Java</label>
                         </div>
                     </div>

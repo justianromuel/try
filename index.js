@@ -59,8 +59,6 @@ app.post('/add-project', function (req, res) {
         client.query(query, function (err, result) {
             if (err) throw err
             done()
-            // let data = result.rows[0]
-            console.log(result.rows);
             res.redirect('/')
         })
     })
@@ -92,15 +90,23 @@ app.get('/project-detail/:id', function (req, res) {
 
         client.query(`SELECT * FROM tb_projects WHERE id = ${id}`, function (err, result) {
             if (err) throw err
+            let data = result.rows[0]
             done()
 
-            let data = result.rows[0]
             // console.log(result.rows[0]);
-            data.start_date = getFullTime(data.start_date)
-            data.end_date = getFullTime(data.end_date)
-            data.duration = durationBlog(data.start_date, data.end_date)
-
-            res.render('project-detail', data)
+            data = {
+                name: data.name,
+                start_date: getFullTime(data.start_date),
+                end_date: getFullTime(data.end_date),
+                duration: durationBlog(data.start_date, data.end_date),
+                description: data.description,
+                reactjs: checkboxes(data.technologies[0]),
+                nodejs: checkboxes(data.technologies[1]),
+                javascript: checkboxes(data.technologies[2]),
+                java: checkboxes(data.technologies[3]),
+                image: data.image
+            }
+            res.render('project-detail', { detail: data })
         })
     })
 })
@@ -117,14 +123,15 @@ app.get('/edit-project/:id', function (req, res) {
             done()
 
             let data = result.rows[0];
+            console.log('ini log result.rows');
             console.log(result.rows[0]);
-            let technologies = [];
+            // let technologies = [];
+            // technologies.push = data.reactjs
             data = {
                 name: data.name,
                 start_date: getFullTime(data.start_date),
                 end_date: getFullTime(data.end_date),
                 description: data.description,
-
                 reactjs: checkboxes(data.technologies[0]),
                 nodejs: checkboxes(data.technologies[1]),
                 javascript: checkboxes(data.technologies[2]),
@@ -133,11 +140,10 @@ app.get('/edit-project/:id', function (req, res) {
             }
             res.render('edit-project', { edit: data, id })
         })
-
     })
 })
 
-app.put('/update-project/:id', function (req, res) {
+app.post('/update-project/:id', function (req, res) {
     let data = req.body
     let id = req.params.id
 
@@ -149,11 +155,9 @@ app.put('/update-project/:id', function (req, res) {
         reactjs: checkboxes(data.reactjs),
         nodejs: checkboxes(data.nodejs),
         javascript: checkboxes(data.javascript),
-        java: checkboxes(data.java)
+        java: checkboxes(data.java),
+        image: data.image
     }
-
-
-    console.log(data);
 
     let query = `UPDATE public.tb_projects SET name='${data.name}', start_date='${data.start_date}', end_date='${data.end_date}', description='${data.description}', technologies='{"${data.reactjs}","${data.nodejs}","${data.javascript}","${data.java}"}', image='${data.image}' WHERE id = ${id}`
 
@@ -236,10 +240,18 @@ function getFullTime(waktu) {
 
 // Function checkbox
 function checkboxes(condition) {
-    if (condition === 'on') {
+    if (condition === 'on' || condition === 'true') {
         return true
     } else {
         return false
+    }
+}
+
+function checkboxes2(condition) {
+    if (typeof condition === undefined || condition === "undefined") {
+        return false
+    } else {
+        return true
     }
 }
 
